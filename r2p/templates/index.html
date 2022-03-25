@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/basic.css' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sample Page </title>
+</head>
+<body>
+
+		{% for item in query_results %}
+		<div class="rcorners1" width="200px"> 
+			<p class="singleline">{{ item.person_firstname }} </p> 
+			<p clasa="slngleline">{{ item.person_lastname }}</p>
+		</div>
+		{% endfor %}
+
+</body>
+</html>

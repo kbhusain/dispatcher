@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container-fluid">	
+		<form  id="people-form">
+			
+			<div class="row">	
+
+			{% csrf_token %}
+
+			{% for field in form %}
+
+				<div class="form-group col-4">
+					<label  class="col-12">{{field.label}}</label>
+					{{ field }}
+				</div>
+
+			{% endfor %}
+			<input type="submit" class="btn btn-primary" value="Create New" > 
+				</div>
+		</form>
+</div>
+
+
+
+
+	{% for itm in persons %} 
+	<li> {{ itm.rfg_name}} </li>
+	{% endfor %}
+
+{%  endblock content %}
+
+
+
+{% block javascript %}
+<script>	
+
+$('#people-form').submit(function(e) { 
+	e.preventDefault(); 
+	var serializeData = $(this).serialize(); 
+	$.ajax({ 
+			type: 'POST', 
+			url : "{% url 'add_person' %} ",
+			data: serializeData,
+			success: function(response) { 
+					$('people-form').trigger('reset');
+					// var instance = JSON.parse(response["instance"]);
+					// var fields = instance[0].fields; 
+					// $('#some text ').text(fields['name'])
+
+			},
+			error: function(response) {
+					alert(response['responseJSON']['error'])
+
+			}
+	});
+
+});
+
+
+</script>
+
+
+{% endblock javascript %}

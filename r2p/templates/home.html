@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	{% for itm in item_list %} 
+	<li> {{ itm.rfg_name}} </li>
+	{% endfor %}
+
+{%  endblock content %}

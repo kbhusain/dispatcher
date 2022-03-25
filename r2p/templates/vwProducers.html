@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+ <h2> Assigned to {{ AssigneeName }} </h2>
+ <div id="itemTableOfRequests"></div> 
+ <hr>   
+
+</div>
+
+
+{% else %}
+    <p>You are not logged in           {{ user.get_username }} </p>
+    <a href="{% url 'login' %}">Log In</a> 
+    : <a href="{% url 'signmeup' %}">Sign Me Up 2</a>
+{% endif %}
+
+    
+
+{%  endblock content %}
+
+{% block myscript %}
+<script>
+
+
+
+window.onload = function() { 
+    console.log("loadiong ....")
+    var pid = '{{ Person.person_id }}';
+    var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
+    console.log(url) ; 
+
+    showMyAssignments(); 
+    //refreshThisAssignmentPage(pid);
+
+}
+
+// PID is assignee  --- not requester. 
+function refreshThisAssignmentPage(pid){ 
+    showMyAssignments(); 
+}
+//     var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
+//     console.log(url) ;
+//     readJSON(url,function(err, data) {
+//         if (err != null) {
+//           console.error(err);
+//         } else { 
+//           console.log(data);
+//          showAssignedItemsTable(data, pid, 'itemTableOfRequests', "available_tasks")
+//         }
+//       })
+// }
+
+
+function showAssignedItemsTable(rdata, pid, divname, divavailable) { 
+    var pid = '{{ Person.person_id }}'; 
+
+    showMyAssignments(); 
+
+
+    // var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
+    // console.log(url) ;
+    // readJSON(url,function(err, data) {
+    //     if (err != null) {
+    //       console.error(err);
+    //     } else { 
+    //       console.log(data);
+    //       createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false});
+    //       createItemCards(pid,'details',data['available'],  {'showUnassign': true, 'showAssign':true}) ;
+    //       document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4>'
+    //     }
+    //   })
+    }
+
+
+
+// p_id is the requester ! 
+function editItemForAssignee(requester_id,r_id){
+    var pid = '{{ Person.person_id }}'; 
+     // The callback function will need the following information : 
+    document.getElementById('#query-results').setAttribute('refresh_rid_after_edit', r_id);  
+    document.getElementById('#query-results').setAttribute('refresh_requester_id_after_edit', requester_id); // 
+    document.getElementById('#query-results').setAttribute('refresh_producer_id_after_edit', pid); // 
+    document.getElementById('#query-results').setAttribute('refresh-after-modal-edit', 'refreshThisAssignmentPage');
+    editItemDetails(requester_id,r_id,'','refreshThisAssignmentPage')
+ }
+
+
+//===============================================
+
+
+
+
+</script>
+
+
+{% endblock myscript %}
