@@ -17,23 +17,11 @@
   border-radius: 2px;
   }
 
-
-
-
-
+ 
 .text-gray {
   color: #aaa
 }
-
-
-table, th, td {
-  border: 1px solid black;
-  width: 80%; 
-}
-table {
-  padding-left: 5px;
-}
-
+ 
 .singleline { 
     color: black; 
     font-size: small;
@@ -42,17 +30,37 @@ table {
 }
 .rcorners1 {
   border-radius: 5px; 
+  padding-left: 0px;
+  padding-right: 0px;
+  float:left;
+  color: #000000;
+  width: 250px;
+  height: 180px;
+  border-width: 1px; 
+  border-color: #7979b6; 
+  margin: 4px;
+
+  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: left;
+  background-color: #f1f1f1;
+}
+
+.rcorners_old {
+  border-radius: 5px; 
   padding: 20px;
   float:left;
   color: #1a0f03;
   width: 250px;
-  height: 150px;
+  height: 180px;
   border-width: 1px;
   /*border-style: solid;*/
   border-color: #7979b6;
   /*box-shadow: 10px 10px rgb(17, 14, 11);*/
   margin: 4px;
 }
+
 
 
 .rcorners1:hover {
@@ -73,7 +81,7 @@ table {
 
 /* unvisited link */
 a:link {
-  color: rgb(11, 17, 1);
+  color: rgb(25, 26, 25);
 }
 
 /* visited link */
@@ -101,7 +109,7 @@ a:active {
 .personinfo {
   color: #291906;
   font-size: small;
-  line-height: 80%;
+   
 }
 
 .rcorners2 {
@@ -109,16 +117,7 @@ a:active {
   border: 2px solid #73AD21;
   padding: 20px;
 }
-/*   
-.rcorners3 {
-  border-radius: 25px;
-  background: url(paper.gif);
-  background-position: left top;
-  background-repeat: repeat;
-  padding: 20px;
-  width: 200px;
-  height: 150px;
-} */
+ 
 
 .requestli { 
   margin-top: 2px;
@@ -133,6 +132,8 @@ a:active {
 
 .nobullets {
   list-style-type: none;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .right-aligned-label {
@@ -180,7 +181,7 @@ img {
 
 a {
   text-decoration: none;
-  color: inherit
+  color: #0c0d0e;
 }
 
 a:hover,
@@ -337,7 +338,7 @@ a.button.btn-small {
 
 a.button {
   display: inline-block;
-  background: #d9d9d9;
+  background: #8b8989;
   font-size: 0.8333em;
   line-height: 1.8333em;
   white-space: nowrap;
@@ -351,13 +352,13 @@ a.button:hover {
 button.yellow,
 a.button.yellow,
 input[type="button"].button.yellow {
-  background: #f0715f
+  background: #363333
 }
 
 button.yellow:hover,
 a.button.yellow:hover,
 input[type="button"].button.yellow:hover {
-  background: #f0715f
+  background: #363333
 }
 
 
@@ -378,8 +379,6 @@ input[type="button"].button.yellow:hover {
   height: 28px;
   padding: 0 24px;
 }
-
-
 
 .five-stars-container {
   display: inline-block;
@@ -417,14 +416,16 @@ input[type="button"].button.yellow:hover {
   z-index: 0
 }
 
-.price {
+.price { 
   color: #7db921;
   font-size: 1.6667em;
   text-transform: uppercase;
   float: right;
   text-align: right;
   line-height: 1;
-  display: block
+  display: block;
+   
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .price small {

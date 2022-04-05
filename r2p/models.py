@@ -80,7 +80,8 @@ class onePerson(models.Model):
     def get_absolute_url(self):
         return  reverse_lazy("person_list")
 
-
+    def __str__(self):
+        return self.person_firstname + " " + self.person_lastname 
 
 POOR = 1
 BELOW_AVERAGE = 2
@@ -128,7 +129,8 @@ class Donateditem(models.Model):
     def get_absolute_url(self):
         return  reverse_lazy("donated_item")
 
-
+    def __str__(self):
+        return self.don_title 
 
 REQ_STATUS_CHOICES = (
     (0, str('Open')),
@@ -171,6 +173,8 @@ class Requesteditem(models.Model):
     def get_absolute_url(self):
         return  reverse_lazy("requested_list")
 
+    def __str__(self):
+        return self.req_description + " by " + str(self.req_requester)
 
 
 class itemStatusType(models.Model):
@@ -185,6 +189,10 @@ class itemStatusType(models.Model):
     def get_absolute_url(self):
         return  reverse_lazy("item_status_type_list")
 
+    
+    def __str__(self):
+        return self.itm_Status 
+
 
 class itemType(models.Model):
     itm_id = models.AutoField(db_column='itm_ID', primary_key=True)  # Field name made lowercase.
@@ -198,3 +206,5 @@ class itemType(models.Model):
     def get_absolute_url(self):
         return  reverse_lazy("item_type_list")
 
+    def __str__(self):
+        return self.itm_Type 

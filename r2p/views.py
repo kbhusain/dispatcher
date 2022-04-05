@@ -37,6 +37,15 @@ basicTasksForNewRefuguee = [
 
 # Create your views here.
 
+def index(request,  *args, **kwargs):
+    ptype = kwargs.get('ptype','REQUESTER')
+
+    persons = onePerson.objects.filter(person_type=ptype)
+    context = {
+            'query_results': persons
+            }
+    return render(request, 'base.html', context=context)
+
         
 class PersonsList(generics.ListCreateAPIView):
     queryset = onePerson.objects.all();

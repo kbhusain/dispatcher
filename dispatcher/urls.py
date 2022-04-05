@@ -26,6 +26,7 @@ router.register(r'groups', apisviews.GroupViewSet)
 # router.register(r'personsDetail', r2pviews.PersonsDetail, basename='personsDetail')
 
 urlpatterns = [
+    path('', r2pviews.index, name="index"),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('r2p/', include('r2p.urls', namespace='r2p')),
