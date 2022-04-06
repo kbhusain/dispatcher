@@ -42,6 +42,10 @@ function refreshRequestModal() {
     getAllItems('REQUESTER')
   }
 
+  if (fn == 'refreshItemsForRequesterPage') {
+    getAllPeople('REQUESTER')
+  }
+
   $('#requestModal').modal('hide');
 
 }
@@ -81,9 +85,10 @@ function showMyAssignments(){
           console.error(err);
         } else { 
           console.log(data);
-          createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false});
-          createItemCards(pid,'details',data['available'],  {'showUnassign': true, 'showAssign':true}) ;
+          createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false ,'showDelete': true });
+          createItemCards(pid,'details',data['available'],  {'showUnassign': true, 'showAssign':true , 'showDelete': true }) ;
           document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4'
+
         }
       })
     }
@@ -176,7 +181,7 @@ function getAllItems(iType) {
         } else { 
           console.log(data);
           createItemCards(pid, 'query-results',data['data'],
-             {'showUnassign': true, 'showAssign':false}) ;
+             {'showUnassign': true, 'showAssign':false, 'showDelete': true }) ;
           document.getElementById('details').innerHTML = ''
           document.getElementById('details-title').innerHTML = ''
         }
@@ -190,7 +195,7 @@ function deleteThisRequest(r_id ) {
   console.log("RESULT-", result)
 
   if (result === true ) {
-
+        var csrftoken =  document.querySelector('[name=csrfmiddlewaretoken]').value
         var pid =  global_personID;
         var url1 = global_requiredItemDetail.replace('22',r_id);
         console.log(url1) ;
@@ -201,7 +206,9 @@ function deleteThisRequest(r_id ) {
             contentType : 'application/json',
             success: function(data) { 
                 var pid = global_personID;
-                refreshItemsDetailPage(pid);
+                //refreshItemsDetailPage(pid);
+                document.getElementById('query-results').setAttribute('refresh-after-modal-edit','refreshItemsForRequesterPage');
+                refreshRequestModal();    
             }
         })
    }
@@ -209,7 +216,7 @@ function deleteThisRequest(r_id ) {
 
 
 function cancelThisRequest(r_id ) { 
-    
+    var csrftoken =  document.querySelector('[name=csrfmiddlewaretoken]').value 
     var pid = global_personID;
     var url1 = global_cancelRequest.replace('22',r_id);
 
@@ -221,7 +228,9 @@ function cancelThisRequest(r_id ) {
         contentType : 'application/json',
         success: function(data) { 
             var pid = global_personID;
-            refreshItemsDetailPage(pid);
+            //refreshItemsDetailPage(pid);
+            document.getElementById('query-results').setAttribute('refresh-after-modal-edit','refreshItemsForRequesterPage');
+            refreshRequestModal();    
         }
     })
  }
@@ -234,11 +243,13 @@ function createSingleItemCard(item, extras)
   var btn_assign = '';
   var assigntome = extras['showAssign']; 
   var unassign   = extras['showUnassign']
-  var deletethis = false;
+  var deletethis = extras['showDelete'];
   var cancelthis = false; 
 
-  if ("showCancel" in extras) {
-    deletethis = extras['showCancel']
+
+ 
+  if ("showDelete" in extras) {
+    deletethis = extras['showDelete']
   }
   btn_delete=''
   if (deletethis == true){
@@ -261,8 +272,7 @@ function createSingleItemCard(item, extras)
   }
   if (unassign === false ){ 
     btn_unassign = '';
-  } else { 
-    console.log('... NOT NULL .....')
+  } else {  
     btn_unassign = `<a class="button" href="javascript:unassignRequestForRID(${item.req_id})" >Unassign </a>          `
   }
 
@@ -324,7 +334,9 @@ function createItemCards(pid, html_id,data,extras) {
       hstr += xstr; 
     }
     document.getElementById(html_id).innerHTML = hstr;
-    
+    $('#' + html_id).sortable(); 
+    // DO NOT DO THIS --> $('#' + html_id).disableSelection(); 
+
 
 }
 
@@ -351,6 +363,7 @@ function getAllPeople(ptype) {
 
 
 function assignItemToPID(req_id,pid) { 
+    var csrftoken =  document.querySelector('[name=csrfmiddlewaretoken]').value
     var url1 = global_assignRequest.replace('1',pid).replace('0',req_id);
     console.log(url1) ;
     $.ajax({
@@ -366,6 +379,7 @@ function assignItemToPID(req_id,pid) {
 }
 
 function unassignRequestForRID(req_id,pid) { 
+    var csrftoken =  document.querySelector('[name=csrfmiddlewaretoken]').value
     var url1 = global_unassignRequest.replace('0',req_id);
     console.log(url1) ;
     $.ajax({
@@ -562,9 +576,7 @@ function createOnboardRequests(requester_id) {
           } else { 
             console.log(data);
             getAllPeople('REQUESTER')
-            // createItemCards(pid,"query-results",data['data'], 
-            //       {'showUnassign': false, 'showAssign':false, 'showCancel': true, 'showDelete':true});
-            //document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4>'
+ 
           }
       })
   }
