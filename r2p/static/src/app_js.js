@@ -162,7 +162,7 @@ function reportPersons(pType) {
           xstr = createPersonReport(pType, data)
           document.getElementById('query-results').innerHTML = xstr
           $("#basic-table").DataTable();
-          console.log('reportPersons: made it sortable. ..');
+           
         }
       })
 
@@ -329,7 +329,6 @@ function createItemCards(pid, html_id,data,extras) {
   for (var x=0;x<data.length; x++ ) {
       item = data[x]
       name = item.req_title; 
-      console.log(extras)
       xstr = createSingleItemCard(item,extras);    
       hstr += xstr; 
     }
@@ -456,8 +455,7 @@ function createPersonCards(html_id,data) {
     }
     hstr += "</tbody></table></div>"
     document.getElementById(html_id).innerHTML = hstr;
-    
-    console.log("Make it sortable")
+     
     $("#basic-table").DataTable();
           
   // sorta(document.getElementById("basic-table"));
