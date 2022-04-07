@@ -17,9 +17,6 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
   
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
-         
-
         <link rel="stylesheet" href="{% static 'css/override.css' %}" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{% static 'css/basic.css' %}">      
         
@@ -107,7 +104,10 @@
       <div class="row  justify-content-center">
         <div class="row md-8">
           <div class="col-1">
+
+
           </div>
+          
           <div class="col-8">
             <h1 id="pageHeader" class="mt-2 text-center">{{ PageHeader }}</h1>
             {% if user.is_staff %}
@@ -115,7 +115,7 @@
               <a class="button btn-small yellow popup-map" href='javascript:getAllPeople("REQUESTER")'>Requesters</a>
               <!-- <a class="button btn-small yellow popup-map" href="javascript:" onclick='getAllPeople("DONOR")'>Donors</a> -->
               <a class="button btn-small yellow popup-map" href='javascript:getAllPeople("PRODUCER")'>Volunteers</a>
-              <a class="button btn-small yellow popup-map" href='javascript:showMyAssignments()'>My Assignments</a>
+              <a class="button btn-small yellow popup-map" href='javascript:showMyAssignments("details","details-title")'>My Assignments</a>
               <a class="button btn-small yellow popup-map" href="javascript:editItemForRefugee('{{ Person.person_id }} ',-1)">ADD NEW REQUEST</a>
          
                   <a class="button btn-small yellow dropdown dropdown-toggle nav-link" aria-expanded="false" 
@@ -150,11 +150,30 @@
           </div>
 
           <div class="col-3">
-            <div style="{background: #ff0000;}" id="details-title"> </div> 
+            <div id="details-title"> </div> 
         
-            <div id="details"> </div> 
+            <div  class="col-12" id="details"> </div> 
           </div>
 
+        </div>
+
+        <div class="row md-8">
+
+          <div class="col-1">
+
+
+          </div>
+        
+          <div class="col-8" id="available-task-block" >
+            <div id="available-details-title"> </div> 
+            <div id="available-task-list" ></div>
+          </div>
+
+
+          <div class="col-3">
+
+
+          </div>
         </div>
       </div>
     </div>
@@ -281,10 +300,10 @@
         <div class="col-sm-6 col-md-4 item" id="">
         </div>
         
-        {% if user.is_authenticated %}
+        <!-- {% if user.is_authenticated %}
         <a href="{% url 'password_change' %}">Change Password </a>
         <a href="{% url 'logout' %}">Log Out</a>
-        {% endif %}
+        {% endif %} -->
         <!-- <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="{% static 'imgs/delivery.png' %}"  /></a>
             <h3 class="name">Track completions</h3>
             <p class="description">Monitor the status of each task as it progresses to completion. </p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>

@@ -76,7 +76,7 @@ function detailsForPerson(pid) {
 
 
   ///
-function showMyAssignments(){ 
+function showMyAssignments(whereToShow, titleDivName ){ 
     var pid = global_personID; 
     var url = global_getAllRequestsByAssignee.replace('61',pid); 
     console.log(url) ;
@@ -85,14 +85,14 @@ function showMyAssignments(){
           console.error(err);
         } else { 
           console.log(data);
-          createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false ,'showDelete': true });
-          createItemCards(pid,'details',data['available'],  {'showUnassign': true, 'showAssign':true , 'showDelete': true }) ;
-          document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4'
 
+          createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false ,'showDelete': true });
+          createItemCards(pid,whereToShow,data['available'],  {'showUnassign': true, 'showAssign':true , 'showDelete': true }) ;
+          document.getElementById(titleDivName).innerHTML = '<center><button class="btn-dark" onclick="showAvailableTasks()">AvailableTasks</button></center>'
         }
       })
     }
-
+// 'details-title'
 
 function getPersonDetailForEdits(ppid) { 
   var url = global_personDetail.replace('22',ppid); 
@@ -464,7 +464,7 @@ function createPersonCards(html_id,data) {
 
 function createPersonReport(pType,data){
 
-  var hstr = '<div  > <table id="basic-table" class="sortable searchable table table-hover"  >';  
+  var hstr = '<div> <table id="basic-table" class="sortable searchable table table-hover"  >';  
   hstr += `  <thead>
       <tr>
         <th>ID </th>

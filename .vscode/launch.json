@@ -1,0 +1,16 @@
+{
+ 
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["runserver", "0.0.0.0:8000"],
+            "console": "integratedTerminal",
+            "justMyCode": true, 
+            "envFile": "${workspaceFolder}/dev.env"
+        }
+    ]
+}

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from django.urls import reverse_lazy
-import os
+import os,sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 print(BASE_DIR)
@@ -24,18 +24,16 @@ MEDIA_ROOT = str(BASE_DIR) + "./"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # OR from django.core.management.utils import get_random_secret_key
-# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())##
-# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-# DEBUG = os.getenv("DEBUG", "False") == "True"
-# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
-
+# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())##not good##
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+DEBUG = os.getenv("DJANGO_DEBUG", True) #
+DEVELOPMENT_MODE = os.getenv("DJANGO_DEVELOPMENT_MODE", True) # for deployment == "True"
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", 'django-insecure-5n)(yaj5$sk*^@xhlf6&+g^&c&68u_(!m!eshqt7zbafi=zl)%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 AUTH_USER_MODEL = 'accounts.User'
-ALLOWED_HOSTS = ["10.0.0.48", 'localhost']
+# ALLOWED_HOSTS = ["10.0.0.48", 'localhost']
 LOGIN_URL = '../../accounts/login'
 LOGIN_REDIRECT_URL = '../../r2p/allPeopleAfterLogin'
 LOGOUT_REDIRECT_URL = '../../accounts/login'
@@ -89,13 +87,27 @@ WSGI_APPLICATION = 'dispatcher.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -132,7 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

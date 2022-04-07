@@ -6,9 +6,9 @@
 {% if user.is_authenticated %}
  <h2> Assigned to {{ AssigneeName }} </h2>
  <div id="itemTableOfRequests"></div> 
- <hr>   
+   
 
-</div>
+
 
 
 {% else %}
@@ -31,50 +31,32 @@ window.onload = function() {
     var pid = '{{ Person.person_id }}';
     var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
     console.log(url) ; 
-
-    showMyAssignments(); 
+    showMyAssignments("available-task-list", "available-details-title"); 
     //refreshThisAssignmentPage(pid);
 
 }
 
 // PID is assignee  --- not requester. 
 function refreshThisAssignmentPage(pid){ 
-    showMyAssignments(); 
+    showMyAssignments("available-task-list", "available-details-title"); 
 }
-//     var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
-//     console.log(url) ;
-//     readJSON(url,function(err, data) {
-//         if (err != null) {
-//           console.error(err);
-//         } else { 
-//           console.log(data);
-//          showAssignedItemsTable(data, pid, 'itemTableOfRequests', "available_tasks")
-//         }
-//       })
-// }
+
 
 
 function showAssignedItemsTable(rdata, pid, divname, divavailable) { 
     var pid = '{{ Person.person_id }}'; 
-
-    showMyAssignments(); 
-
-
-    // var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
-    // console.log(url) ;
-    // readJSON(url,function(err, data) {
-    //     if (err != null) {
-    //       console.error(err);
-    //     } else { 
-    //       console.log(data);
-    //       createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false});
-    //       createItemCards(pid,'details',data['available'],  {'showUnassign': true, 'showAssign':true}) ;
-    //       document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4>'
-    //     }
-    //   })
+    showMyAssignments("available-task-list", "available-details-title"); 
     }
 
 
+function showAvailableTasks() {
+  var x = document.getElementById("available-task-list");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 // p_id is the requester ! 
 function editItemForAssignee(requester_id,r_id){
