@@ -2,4 +2,4 @@
 *.pyca
 *.pyc
 *__pycache__*
-*.bat
+*.env
