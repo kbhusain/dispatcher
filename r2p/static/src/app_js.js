@@ -215,12 +215,12 @@ function createItemsTables(html_id,data,extras) {
           </td>
           <td> 
           <a href="javascript:" onclick='detailsForPerson(${item.req_requester_id}, "requester");'>
-            <img src="${global_onePersonCheckIcon}" title="Requester">${item.req_requester_name} >
+           ${item.req_requester_name} 
           </a>
           </td>
           <td>
           <a href="javascript:" onclick='detailsForPerson(${item.req_assigned_to}, "producer");'>
-          <img src="${global_onePersonCheckIcon}" title="Assignee">${item.req_provider_name}  >      </a>
+          ${item.req_provider_name}       </a>
           </td>
 
 
@@ -258,7 +258,7 @@ function getAllItems(iType) {
         } else { 
           console.log(data);
           createItemsTables( 'query-results',data['data'],
-             {'showUnassign': true, 'showAssign':true, 'showDelete': true }) ;
+             {'showUnassign': true, 'showAssign':false, 'showDelete': true }) ;
           document.getElementById('details').innerHTML = ''
           document.getElementById('details-title').innerHTML = ''
           $("#basic-items-table").DataTable();
