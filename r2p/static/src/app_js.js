@@ -168,6 +168,83 @@ function reportPersons(pType) {
 
 }
 
+
+
+function createItemsTables(html_id,data,extras) {
+    var hstr = "";  
+    document.getElementById('pageHeader').innerHTML = '';
+    var hstr = '<div> <table id="basic-items-table" class="sortable searchable table table-hover"  >';  
+    hstr += `  <thead>
+        <tr>
+        <th>Details</th>
+        <th>Requester</th>
+        <th>Person</th>
+          <th>Type</th>
+          <th>Title</th> 
+          <th>Status</th> 
+          <th>Desc</th> 
+          <th>Notes</th> 
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="basic-table-body">
+    `;
+
+    var pid = global_personID; 
+    var btns = createSingleItemButtons(pid,item,extras); 
+  
+    var btn_unassign = btns[0]
+    var btn_assign  = btns[1]
+    var btn_cancel  = btns[2]
+    var btn_delete  = btns[3]
+  
+    var notes = item.req_notes; 
+    if (notes != null ) {
+        if (notes.length > 12) {
+          notes = notes.substring(0,12) + "..."
+        }
+      }
+
+    for (var x=0;x<data.length; x++ ) {
+        item = data[x]
+        name = item.req_title; 
+        xstr = `<tr>
+          <td>
+          <a href="javascript:editItemDetails('${item.req_requester_id}','${item.req_id}', 'admin', 'refreshAllRequestsPage')"> ${item.req_id}  
+          </a>
+          </td>
+          <td> 
+          <a href="javascript:" onclick='detailsForPerson(${item.req_requester_id}, "requester");'>
+            <img src="${global_onePersonCheckIcon}" title="Requester">${item.req_requester_name} >
+          </a>
+          </td>
+          <td>
+          <a href="javascript:" onclick='detailsForPerson(${item.req_assigned_to}, "producer");'>
+          <img src="${global_onePersonCheckIcon}" title="Assignee">${item.req_provider_name}  >      </a>
+          </td>
+
+
+            <td>${item.req_typeStr}</td>
+            <td>${item.req_title}</td>
+            <td>${item.req_statusStr}</td>
+            <td>${item.req_description}</td>
+            <td>${notes}</td>
+            <td> 
+            ${btn_unassign}  ${btn_assign} ${btn_cancel} ${btn_delete}     
+            </td>
+        </tr> 
+`
+// 
+        
+
+        hstr += xstr; 
+      }
+
+      hstr += "</tbody></table></div>"
+      document.getElementById(html_id).innerHTML = hstr;
+      $('#' + html_id).sortable(); 
+}
+
 //-----------------------------------------------------------------------------------
 // Returns all people of a particular type. 
 //-----------------------------------------------------------------------------------
@@ -180,10 +257,11 @@ function getAllItems(iType) {
           console.error(err);
         } else { 
           console.log(data);
-          createItemCards(pid, 'query-results',data['data'],
-             {'showUnassign': true, 'showAssign':false, 'showDelete': true }) ;
+          createItemsTables( 'query-results',data['data'],
+             {'showUnassign': true, 'showAssign':true, 'showDelete': true }) ;
           document.getElementById('details').innerHTML = ''
           document.getElementById('details-title').innerHTML = ''
+          $("#basic-items-table").DataTable();
         }
       })
 }
@@ -236,49 +314,63 @@ function cancelThisRequest(r_id ) {
  }
 
 
-function createSingleItemCard(item, extras)  
+
+function createSingleItemButtons(pid,item,extras) {
+
+
+    var btn_assign = '';
+    var assigntome = extras['showAssign']; 
+    var unassign   = extras['showUnassign']
+    var deletethis = extras['showDelete'];
+    var cancelthis = false; 
+  
+   
+    if ("showDelete" in extras) {
+      deletethis = extras['showDelete']
+    }
+    btn_delete=''
+    if (deletethis == true){
+      btn_delete = `<a  class="button" href="javascript:deleteThisRequest(${item.req_id})" >Delete</a>`;
+    }
+  
+    if ("showCancel" in extras) {
+      cancelthis = extras['showCancel']
+    }
+    btn_cancel = ''
+    if (cancelthis == true){
+      btn_cancel = `<a class="button" href="javascript:cancelThisRequest(${item.req_id})" >Cancel</a>`;
+    }
+  
+  
+  
+    
+    if (assigntome === true ){
+      btn_assign = `<a class="button" href="javascript:assignItemToPID(${item.req_id},${pid})" > ASSIGN TO ME</a>`;
+    }
+    if (unassign === false ){ 
+      btn_unassign = '';
+    } else {  
+      btn_unassign = `<a class="button" href="javascript:unassignRequestForRID(${item.req_id})" >Unassign </a>          `
+    }
+  
+    if  (item.req_assigned_to === null)  {
+      btn_unassign = '';
+    }
+  
+    return [ btn_unassign , btn_assign , btn_cancel , btn_delete ]
+}
+
+
+function createSingleItemCard(pid,item, extras)  
 {
   
   var pid = global_personID; 
-  var btn_assign = '';
-  var assigntome = extras['showAssign']; 
-  var unassign   = extras['showUnassign']
-  var deletethis = extras['showDelete'];
-  var cancelthis = false; 
+  var btns = createSingleItemButtons(pid,item,extras); 
 
-
- 
-  if ("showDelete" in extras) {
-    deletethis = extras['showDelete']
-  }
-  btn_delete=''
-  if (deletethis == true){
-    btn_delete = `<a  class="button" href="javascript:deleteThisRequest(${item.req_id})" >Delete</a>`;
-  }
-
-  if ("showCancel" in extras) {
-    cancelthis = extras['showCancel']
-  }
-  btn_cancel = ''
-  if (cancelthis == true){
-    btn_cancel = `<a class="button" href="javascript:cancelThisRequest(${item.req_id})" >Cancel</a>`;
-  }
-
-
-
-  
-  if (assigntome === true ){
-    btn_assign = `<a class="button" href="javascript:assignItemToPID(${item.req_id},${pid})" > ASSIGN TO ME</a>`;
-  }
-  if (unassign === false ){ 
-    btn_unassign = '';
-  } else {  
-    btn_unassign = `<a class="button" href="javascript:unassignRequestForRID(${item.req_id})" >Unassign </a>          `
-  }
-
-  if  (item.req_assigned_to === null)  {
-    btn_unassign = '';
-  }
+  var btn_unassign = btns[0]
+  var btn_assign  = btns[1]
+  var btn_cancel  = btns[2]
+  var btn_delete  = btns[3]
 
   var notes = item.req_notes; 
   if (notes != null ) {
@@ -322,14 +414,14 @@ function createSingleItemCard(item, extras)
 //-----------------------------------------------------------------------------------
 // Shows boxes of information in div named by html_id given the data; 
 //-----------------------------------------------------------------------------------
-function createItemCards(pid, html_id,data,extras) {
+function createItemCards(pid,html_id,data,extras) {
   var hstr = "";  
   document.getElementById('pageHeader').innerHTML = '';
-
+  console.log("Item cards for ", pid)
   for (var x=0;x<data.length; x++ ) {
       item = data[x]
       name = item.req_title; 
-      xstr = createSingleItemCard(item,extras);    
+      xstr = createSingleItemCard(pid,item,extras);    
       hstr += xstr; 
     }
     document.getElementById(html_id).innerHTML = hstr;

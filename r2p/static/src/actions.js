@@ -74,7 +74,7 @@ function showRequestdetailsForPerson(pid, url, divname) {
           console.error(err);
         } else { 
           console.log(data);
-          createItemCards(pid, divname,data['data'], {'showUnassign': true, 'showAssign':false , 'showDelete': true }) ;
+          createItemCards(pid,divname,data['data'], {'showUnassign': true, 'showAssign':false , 'showDelete': true }) ;
         }
       })
 }
