@@ -32,13 +32,6 @@ window.onload = function() {
     var url = "{% url 'apis:getAllRequestsByAssignee' r_id=22 avail=1 %}".replace('22',pid); 
     console.log(url) ; 
     showMyAssignments("available-task-list", "available-details-title"); 
-    //refreshThisAssignmentPage(pid);
-
-}
-
-// PID is assignee  --- not requester. 
-function refreshThisAssignmentPage(pid){ 
-    showMyAssignments("available-task-list", "available-details-title"); 
 }
 
 

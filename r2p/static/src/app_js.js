@@ -50,6 +50,13 @@ function refreshRequestModal() {
 
 }
 
+
+
+// PID is assignee  --- not requester. 
+function refreshThisAssignmentPage(pid){ 
+    showMyAssignments("available-task-list", "available-details-title"); 
+}
+
 /* 
 Inputs: 
           Person ID --- for the person_id field in onePerson
