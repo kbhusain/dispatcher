@@ -29,19 +29,19 @@
     margin-bottom: 3px;
 }
 .rcorners1 {
-  border-radius: 5px; 
+  border-radius: 15px; 
   padding-left: 0px;
   padding-right: 0px;
   float:left;
-  color: #000000;
+  
   width: 250px;
   height: 180px;
-  border-width: 1px; 
-  border-color: #7979b6; 
+  border-width: 5px; 
+  border-color: #1ca010; 
   margin: 4px;
 
   
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   padding: 16px;
   text-align: left;
   background-color: #f1f1f1;

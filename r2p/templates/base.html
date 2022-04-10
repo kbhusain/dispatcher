@@ -116,19 +116,41 @@
               <!-- <a class="button btn-small yellow popup-map" href="javascript:" onclick='getAllPeople("DONOR")'>Donors</a> -->
               <a class="button btn-small yellow popup-map" href='javascript:getAllPeople("PRODUCER")'>Volunteers</a>
               <a class="button btn-small yellow popup-map" href='javascript:showMyAssignments("details","details-title")'>My Assignments</a>
-              <a class="button btn-small yellow popup-map" href="javascript:editItemForRefugee('{{ Person.person_id }} ',-1)">ADD NEW REQUEST</a>
+ 
          
+                  <a class="button btn-small yellow dropdown dropdown-toggle nav-link" aria-expanded="false" 
+                    data-bs-target="navbar0" 
+                    data-bs-toggle="dropdown">ACTIONS</a>
+                  <ul class="dropdown-menu" id="navbar0">
+                    <li><a class="dropdown-item" href="javascript:editItemForRefugee('{{ Person.person_id }} ',-1)">Add New REQUEST</a></li> 
+                    <li><a class="dropdown-item" href="javascript:" onclick='showModalPerson("REQUESTER")'>Add REQUESTER</a></li>
+                    <li><a class="dropdown-item" href="javascript:" onclick='showModalPerson("PRODUCER")'>Add VOLUNTEER</a></li>
+                  </ul>
+                </a>  
+<!-- 
+              <a class="button btn-small yellow popup-map" href="javascript:editItemForRefugee('{{ Person.person_id }} ',-1)">ADD NEW REQUEST</a>
+          -->
                   <a class="button btn-small yellow dropdown dropdown-toggle nav-link" aria-expanded="false" 
                     data-bs-target="navbar1" 
                     data-bs-toggle="dropdown">REPORTS</a>
                   <ul class="dropdown-menu" id="navbar1">
                     <li><a class="dropdown-item" href="javascript:" onclick='getAllItems("REQUESTER")'>All Requests</a></li>
                     <li><a class="dropdown-item" href="javascript:" onclick='reportPersons("REQUESTER")'>Report Requesters</a></li>
-                    <li><a class="dropdown-item" href="javascript:" onclick='reportPersons("PRODUCER")'>Report Volunteers</a></li>
-                    <li><a class="dropdown-item" href="javascript:" onclick='showModalPerson("REQUESTER")'>Add REQUESTER</a></li>
-                    <li><a class="dropdown-item" href="javascript:" onclick='showModalPerson("PRODUCER")'>Add VOLUNTEER</a></li>
+                    <li><a class="dropdown-item" href="javascript:" onclick='reportPersons("PRODUCER")'>Report Volunteers</a></li> 
                   </ul>
                 </a>  
+
+                <a class="button btn-small yellow dropdown dropdown-toggle nav-link" aria-expanded="false" 
+                  data-bs-target="navbar2" 
+                  data-bs-toggle="dropdown">ASSIGNMENTS</a>
+                <ul class="dropdown-menu" id="navbar2">
+                  <li><a class="dropdown-item" href="#">All Requests</a></li>
+                  <li><a class="dropdown-item" href="#" >For all Volunteers</a></li>
+                  <li><a class="dropdown-item" href="#">For a Volunteer</a></li>
+                  <li><a class="dropdown-item" href="#")'>Dates</a></li>
+                  <li><a class="dropdown-item" href="#")'>By Type</a></li>
+                </ul>
+              </a>  
 
             {% endif  %}
             <div id="requester-content-only">
