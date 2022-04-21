@@ -25,7 +25,7 @@ MEDIA_ROOT = str(BASE_DIR) + "./"
 # SECURITY WARNING: keep the secret key used in production secret!
 # OR from django.core.management.utils import get_random_secret_key
 # SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())##not good##
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,10.0.0.48").split(",")
 DEBUG = os.getenv("DJANGO_DEBUG", True) #
 DEVELOPMENT_MODE = os.getenv("DJANGO_DEVELOPMENT_MODE", True) # for deployment == "True"
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", 'django-insecure-5n)(yaj5$sk*^@xhlf6&+g^&c&68u_(!m!eshqt7zbafi=zl)%')

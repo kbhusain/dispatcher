@@ -27,6 +27,10 @@ function refreshRequestModal() {
   var requester_id = document.getElementById('query-results').getAttribute('refresh_requester_id_after_edit');  // person (requestor or )
   var producer_id  = document.getElementById('query-results').getAttribute('refresh_producer_id_after_edit');  // person (requestor or )
  
+
+console.log(" REFRESH ... refresh request model : ", rid, requester_id, producer_id)
+
+
   var fn  = document.getElementById('query-results').getAttribute('refresh-after-modal-edit');
   document.getElementById('query-results').setAttribute('refresh-after-modal-edit','');
   if (fn == 'refreshItemsDetailPage') {
@@ -43,7 +47,8 @@ function refreshRequestModal() {
   }
 
   if (fn == 'refreshItemsForRequesterPage') {
-    getAllPeople('REQUESTER')
+        refreshRequestersPage(requester_id)
+  
   }
 
   $('#requestModal').modal('hide');
@@ -51,6 +56,28 @@ function refreshRequestModal() {
 }
 
 
+
+
+//
+// Refreshes the requester page and sets this page to be set up for the modal dialog to show when it's closed. 
+//
+function refreshRequestersPage(pid) {
+    var   url = global_getAllRequestsByRequester.replace('61',pid);
+    document.getElementById('query-results').setAttribute('refresh_rid_after_edit','refreshItemsForRequesterPage'); 
+    document.getElementById('query-results').setAttribute('refresh_requester_id_after_edit',pid); 
+    console.log(url) ;
+    readJSON(url,function(err, data) {
+        if (err != null) {
+          console.error(err);
+        } else { 
+          console.log(data);
+          createItemCards(pid,"query-results",data['data'], 
+                {'showUnassign': false, 'showAssign':false, 'showCancel': true, 'showDelete':true, 'refreshCallbackParam' : 'refreshRequestersPage'});
+          //document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4>'
+        }
+      })
+
+}
 
 // PID is assignee  --- not requester. 
 function refreshThisAssignmentPage(pid){ 
@@ -265,7 +292,7 @@ function getAllItems(iType) {
         } else { 
           console.log(data);
           createItemsTables( 'query-results',data['data'],
-             {'showUnassign': true, 'showAssign':false, 'showDelete': true }) ;
+             {'showUnassign': true, 'showAssign':false, 'showDelete': true , 'refreshCallbackParam' : 'refreshAllRequestsPage'}) ;
           document.getElementById('details').innerHTML = ''
           document.getElementById('details-title').innerHTML = ''
           $("#basic-items-table").DataTable();
@@ -337,7 +364,7 @@ function createSingleItemButtons(pid,item,extras) {
     }
     btn_delete=''
     if (deletethis == true){
-      btn_delete = `<a  class="button" href="javascript:deleteThisRequest(${item.req_id})" >Delete</a>`;
+      btn_delete = `<a  class="card-button " href="javascript:deleteThisRequest(${item.req_id})" >Delete</a>`;
     }
   
     if ("showCancel" in extras) {
@@ -345,19 +372,19 @@ function createSingleItemButtons(pid,item,extras) {
     }
     btn_cancel = ''
     if (cancelthis == true){
-      btn_cancel = `<a class="button" href="javascript:cancelThisRequest(${item.req_id})" >Cancel</a>`;
+      btn_cancel = `<a class="card-button " href="javascript:cancelThisRequest(${item.req_id})" >Cancel</a>`;
     }
   
   
   
     
     if (assigntome === true ){
-      btn_assign = `<a class="button" href="javascript:assignItemToPID(${item.req_id},${pid})" > ASSIGN TO ME</a>`;
+      btn_assign = `<a class="card-button  " href="javascript:assignItemToPID(${item.req_id},${pid})" > ASSIGN TO ME</a>`;
     }
     if (unassign === false ){ 
       btn_unassign = '';
     } else {  
-      btn_unassign = `<a class="button" href="javascript:unassignRequestForRID(${item.req_id})" >Unassign </a>          `
+      btn_unassign = `<a class="card-button " href="javascript:unassignRequestForRID(${item.req_id})" >Unassign </a>          `
     }
   
     if  (item.req_assigned_to === null)  {
@@ -379,6 +406,8 @@ function createSingleItemCard(pid,item, extras)
   var btn_cancel  = btns[2]
   var btn_delete  = btns[3]
 
+  var callbackParam = extras['refreshCallbackParam']
+
   var notes = item.req_notes; 
   if (notes != null ) {
       if (notes.length > 12) {
@@ -389,7 +418,7 @@ function createSingleItemCard(pid,item, extras)
   var xstr = `<div class="rcorners1 box"> 
               <ul class="nobullets">
               <h4 class="singleline">
-                <a class="price" href="javascript:editItemDetails('${item.req_requester_id}','${item.req_id}', 'admin', 'refreshAllRequestsPage')"> ${item.req_id}  </a>
+                <a class="price" href="javascript:editItemDetails('${item.req_requester_id}','${item.req_id}', 'admin', '${callbackParam}')"> ${item.req_id}  </a>
                 </h4>
                 <li>Assignee: 
                 <a href="javascript:" onclick='detailsForPerson(${item.req_assigned_to}, "producer");'>
@@ -758,6 +787,9 @@ function editItemDetails(r_id, req_id, viewer, rcallback ) {
   // First get all the persons you can assign to, the types of items. and the status each item can take. 
   // then create the farging drop down lists and 
   // then show the actual dialog. 
+
+
+  console.log(" edit Item detaisl ", r_id, req_id, viewer, rcallback)
   document.getElementById("query-results").setAttribute('json_request_index',req_id)
   document.getElementById("query-results").setAttribute('json_requester_id',r_id)  
   document.getElementById('query-results').setAttribute('refresh-after-modal-edit', rcallback);

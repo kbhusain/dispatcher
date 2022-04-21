@@ -81,7 +81,7 @@
 
 /* unvisited link */
 a:link {
-  color: rgb(25, 26, 25);
+  color: rgb(214, 236, 214);
 }
 
 /* visited link */
@@ -168,9 +168,9 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -ms-overflow-style: scrollbar; 
-
+/* 
   background: linear-gradient(to right, #dfdddd, #f1d7f1);
-  min-height: 100vh
+  min-height: 100vh */
   font-family: Tahoma, "Lucida", Arial;
 }
 
@@ -181,12 +181,12 @@ img {
 
 a {
   text-decoration: none;
-  color: #0c0d0e;
+  color: #fafafa;
 }
 
 a:hover,
 a:focus {
-  color: #01b7f2;
+  color: #5302d6;
   text-decoration: none
 }
 
@@ -336,13 +336,30 @@ a.button.btn-small {
   font-size: 0.9167em
 }
 
+
+
 a.button {
   display: inline-block;
   background: #8b8989;
   font-size: 0.8333em;
   line-height: 1.8333em;
   white-space: nowrap;
-  text-align: center
+  text-align: center;
+  width : 130px;
+}
+
+.card-button { 
+  display: inline; 
+  background: #287eaf;
+ 
+  white-space: nowrap;
+  text-align: center;
+  width : 100px;
+
+  height: 28px;
+  padding: 5px 24px;
+  line-height: 28px;
+  font-size: 0.9167em
 }
 
 a.button:hover {
@@ -352,7 +369,7 @@ a.button:hover {
 button.yellow,
 a.button.yellow,
 input[type="button"].button.yellow {
-  background: #363333
+  background: #287eaf
 }
 
 button.yellow:hover,
@@ -417,7 +434,7 @@ input[type="button"].button.yellow:hover {
 }
 
 .price { 
-  color: #7db921;
+  background-color: #111b02;
   font-size: 1.6667em;
   text-transform: uppercase;
   float: right;
@@ -483,4 +500,14 @@ input[type="button"].button.yellow:hover {
 
 .fa {
   color: #f0715f
+}
+
+#basic-table tbody tr:hover {
+  background-color: rgb(95, 105, 160);
+  cursor: pointer;
+}
+
+#basic-table tr:hover td.sorting_1 {
+  background-color: rgb(95, 105, 160);
+  cursor: pointer;
 }

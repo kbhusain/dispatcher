@@ -47,15 +47,19 @@ window.onload = function() {
 
 function refreshThisPage(pid) {
     var url = '{% url "apis:getAllRequestsByRequester" r_id=61 %}'.replace('61',pid);
+    document.getElementById('query-results').setAttribute('refresh_rid_after_edit','refreshItemsForRequesterPage'); 
+    document.getElementById('query-results').setAttribute('refresh_requester_id_after_edit', pid); // 
+    
+
 
     console.log(url) ;
     readJSON(url,function(err, data) {
         if (err != null) {
           console.error(err);
         } else { 
-          console.log(data);
+          //console.log(data);
           createItemCards(pid,"query-results",data['data'], 
-                {'showUnassign': false, 'showAssign':false, 'showCancel': true, 'showDelete':true});
+                {'showUnassign': false, 'showAssign':false, 'showCancel': true, 'showDelete':true, 'refreshCallbackParam' : 'refreshItemsForRequesterPage'});
           //document.getElementById('details-title').innerHTML = '<h4 class="header-title">Available Tasks</h4>'
         }
       })
