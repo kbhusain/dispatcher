@@ -254,16 +254,16 @@
              
               <ul class="nobullets"> 
                 <li><label  class="right-aligned-label modal-admin-only" for="modalReq_req_id">ID </label>
-                  <input class="modal-admin-only" id="modalReq_req_id" readonly type="number"  name="modalReq_req_id"></li>
+                  <input  class="modal-input-entry-item"  class="modal-admin-only" id="modalReq_req_id" readonly type="number"  name="modalReq_req_id"></li>
                 <li><label  class="right-aligned-label modal-admin-only" for="modalReq_requester">Requester ID</label>
-                  <input class="modal-admin-only" id="modalReq_requester" type="text"  name="modalReq_requester"></li>
+                  <input  class="modal-input-entry-item" class="modal-admin-only" id="modalReq_requester" type="text"  name="modalReq_requester"></li>
                 <li><label  class="right-aligned-label" for="modalReq_item_type">Type </label>
-                  <select id="modalReq_item_type" type="number"  name="modalReq_item_type">
+                  <select  class="modal-input-entry-item" id="modalReq_item_type" type="number"  name="modalReq_item_type">
                   </select>
 
                   </li>
                 <li><label  class="right-aligned-label" for="modalReq_status">Status </label>
-                  <select id="modalReq_status"   type="number"  name="modalReq_status">
+                  <select  class="modal-input-entry-item"  id="modalReq_status"   type="number"  name="modalReq_status">
                       <option value="0">Open </option>
                       <option value="1">Initiated </option>
                       <option value="2">Approved </option>
@@ -278,27 +278,26 @@
                   </li>
                 <li><label  class="right-aligned-label modal-admin-only" for="modalReq_assigned_to">Assigned ID </label>
                   
-                    <select  class="modal-admin-only" id="modalReq_assigned_to"  aria-label="Default select example"  name="modalReq_assigned_to" aria-hidden="true"> 
+                    <select  class="modal-input-entry-item"  class="modal-admin-only" id="modalReq_assigned_to"  aria-label="Default select example"  name="modalReq_assigned_to" aria-hidden="true"> 
                     </select>
                           
                 </li>
-                <li><label  class="right-aligned-label" for="modalReq_quantity">Quantity </label><input id="modalReq_quantity"  type="number"  name="modalReq_quantity"></li>
-                <li><label  class="right-aligned-label" for="modalReq_title">Title </label><input id="modalReq_title"  type="text"  name="modalReq_title"></li>
-                <li><label  class="right-aligned-label" for="modalReq_description">Description </label>
-                  <input id="modalReq_description"  type="text"  name="modalReq_description"></li>
-                <li><label  class="right-aligned-label" for="modalReq_notes">Notes </label>
-                    <textarea rows="4" cols="25" id="modalReq_notes"   name="modalReq_notes"> </textarea></li>
-    
-
-
+                <li><label  class="right-aligned-label" for="modalReq_quantity">Quantity</label>
+                  <input  class="modal-input-entry-item"  id="modalReq_quantity"  type="number"  name="modalReq_quantity"></li>
+                <li><label  class="right-aligned-label" for="modalReq_title">Title</label>
+                  <input  class="modal-input-entry-item" id="modalReq_title"  type="text"  name="modalReq_title"></li>
+                <li><label  class="right-aligned-label" for="modalReq_description">Description</label>
+                  <input  class="modal-input-entry-item" id="modalReq_description"  type="text"  name="modalReq_description"></li>
+                <li><label  class="right-aligned-label" for="modalReq_notes">Notes</label>
+                    <textarea  class="modal-input-entry-item"  rows="4" cols="25" id="modalReq_notes"   name="modalReq_notes"> </textarea></li>
                 <li><label  class="right-aligned-label" for="modalReq_time_taken">Time (Hrs)</label>
-                  
-                  
-                  <input id="modalReq_time_taken"  type="number" min="0" onkeyup="numOnly(this)" onblur="numOnly(this)" name="modalReq_time_taken"></li>
-                <li><label  class="right-aligned-label" for="modalReq_neededbydate">Needed By Date</label><input id="modalReq_neededbydate"  type="text"  name="modalReq_neededbydate"></li>
-                <li><label  class="right-aligned-label" for="modalReq_filledbydate">Filled By Date </label><input id="modalReq_filledbydate"  type="text"  name="modalReq_filledbydate"></li>
+                <input  class="modal-input-entry-item"  id="modalReq_time_taken"  type="number" min="0" onkeyup="numOnly(this)" onblur="numOnly(this)" name="modalReq_time_taken"></li>
+                <li><label  class="right-aligned-label" for="modalReq_neededbydate">Needed By Date</label>
+                  <input  class="modal-input-entry-item" id="modalReq_neededbydate"  type="text"  name="modalReq_neededbydate"></li>
+                <li><label  class="right-aligned-label" for="modalReq_filledbydate">Filled By Date</label>
+                  <input  class="modal-input-entry-item" id="modalReq_filledbydate"  type="text"  name="modalReq_filledbydate"></li>
               </ul>
-            
+              
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

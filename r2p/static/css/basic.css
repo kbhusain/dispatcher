@@ -81,8 +81,9 @@
 
 /* unvisited link */
 a:link {
-  color: rgb(214, 236, 214);
+  color: rgb(29, 32, 29);
 }
+
 
 /* visited link */
 a:visited {
@@ -139,8 +140,14 @@ a:active {
 .right-aligned-label {
 width: 12em;
 text-align: right;
+background: #287eaf;
+color: white; 
+ 
 }
 
+.modal-input-entry-item { 
+width: 220px;
+}
 
 
 .section {
@@ -348,20 +355,6 @@ a.button {
   width : 130px;
 }
 
-.card-button { 
-  display: inline; 
-  background: #287eaf;
- 
-  white-space: nowrap;
-  text-align: center;
-  width : 100px;
-
-  height: 28px;
-  padding: 5px 24px;
-  line-height: 28px;
-  font-size: 0.9167em
-}
-
 a.button:hover {
   background: #98ce44
 }
@@ -434,14 +427,15 @@ input[type="button"].button.yellow:hover {
 }
 
 .price { 
-  background-color: #111b02;
+  background-color: hsl(204, 37%, 80%);
   font-size: 1.6667em;
   text-transform: uppercase;
   float: right;
   text-align: right;
   line-height: 1;
   display: block;
-   
+  padding: 5px;
+  
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -510,4 +504,19 @@ input[type="button"].button.yellow:hover {
 #basic-table tr:hover td.sorting_1 {
   background-color: rgb(95, 105, 160);
   cursor: pointer;
+}
+
+
+
+.card-button { 
+  display: inline; 
+  background: #d9e0e4; 
+  white-space: nowrap;
+  text-align: center;
+  width : 100px;
+
+  height: 28px;
+  padding: 5px 24px;
+  line-height: 28px;
+  font-size: 0.9167em
 }

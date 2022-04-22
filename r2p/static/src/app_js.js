@@ -122,7 +122,7 @@ function showMyAssignments(whereToShow, titleDivName ){
 
           createItemCards(pid,"query-results",data['data'], {'showUnassign': true, 'showAssign':false ,'showDelete': true });
           createItemCards(pid,whereToShow,data['available'],  {'showUnassign': true, 'showAssign':true , 'showDelete': true }) ;
-          document.getElementById(titleDivName).innerHTML = '<center><button class="btn-dark" onclick="showAvailableTasks()">AvailableTasks</button></center>'
+          document.getElementById(titleDivName).innerHTML = '<center><button class="blue-background" onclick="showAvailableTasks()">Available Tasks</button></center>'
         }
       })
     }
@@ -142,6 +142,14 @@ function getPersonDetailForEdits(ppid) {
 
 }
 
+function showAvailableTasks() {
+  var x = document.getElementById("available-task-list");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 // /*
 
@@ -320,6 +328,8 @@ function deleteThisRequest(r_id ) {
                 var pid = global_personID;
                 //refreshItemsDetailPage(pid);
                 document.getElementById('query-results').setAttribute('refresh-after-modal-edit','refreshItemsForRequesterPage');
+                document.getElementById('query-results').setAttribute('refresh_requester_id_after_edit', pid); // 
+    
                 refreshRequestModal();    
             }
         })
@@ -342,6 +352,8 @@ function cancelThisRequest(r_id ) {
             var pid = global_personID;
             //refreshItemsDetailPage(pid);
             document.getElementById('query-results').setAttribute('refresh-after-modal-edit','refreshItemsForRequesterPage');
+            document.getElementById('query-results').setAttribute('refresh_requester_id_after_edit', pid); // 
+    
             refreshRequestModal();    
         }
     })

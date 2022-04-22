@@ -687,6 +687,7 @@ select.form-control:not([size]):not([multiple]) {
   padding: 10px 0;
   -webkit-transition: .3s ease;
   transition: .3s ease;
+  color: black;
 }
 
 .main-nav .dropdown-slide .dropdown-menu .dropdown-item:not(:last-child) {

@@ -3,7 +3,7 @@
 
 
 {% if user.is_authenticated %}
-    <p> List of Requests by {{ RefugeeName }} </p>
+    <p>  {{ RefugeeName }} </p>
     <br>
     <a class="button btn-small yellow popup-map" href="javascript:refreshThisPage('{{ Person.person_id }}')"> REFRESH</a> 
     <a class="button btn-small yellow popup-map" href="javascript:editItemForRefugee('{{ Person.person_id }} ',-1)">MAKE NEW REQUEST</a> 
@@ -22,7 +22,7 @@
 
 {%  endblock content %}
 {% block requester_content %}
-<h3> List of Requests by {{ RefugeeName }} </h3>
+<h3> {{ RefugeeName }} </h3>
 <a class="button btn-small yellow popup-map" href="javascript:refreshThisPage('{{ Person.person_id }}')"> REFRESH</a> 
 <a class="button btn-small yellow popup-map" href="javascript:editItemForRefugee('{{ Person.person_id }} ',-1)">MAKE NEW REQUEST</a> 
 {% endblock requester_content %}
