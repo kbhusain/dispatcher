@@ -376,7 +376,7 @@ function createSingleItemButtons(pid,item,extras) {
     }
     btn_delete=''
     if (deletethis == true){
-      btn_delete = `<a  class="card-button " href="javascript:deleteThisRequest(${item.req_id})" >Delete</a>`;
+      btn_delete = `<a  class="card-button " href="javascript:deleteThisRequest(${item.req_id})" > Delete </a>`;
     }
   
     if ("showCancel" in extras) {
@@ -384,19 +384,19 @@ function createSingleItemButtons(pid,item,extras) {
     }
     btn_cancel = ''
     if (cancelthis == true){
-      btn_cancel = `<a class="card-button " href="javascript:cancelThisRequest(${item.req_id})" >Cancel</a>`;
+      btn_cancel = `<a class="card-button " href="javascript:cancelThisRequest(${item.req_id})" > Cancel </a>`;
     }
   
   
   
     
     if (assigntome === true ){
-      btn_assign = `<a class="card-button  " href="javascript:assignItemToPID(${item.req_id},${pid})" > ASSIGN TO ME</a>`;
+      btn_assign = `<a class="card-button  " href="javascript:assignItemToPID(${item.req_id},${pid})" > Assign </a>`;
     }
     if (unassign === false ){ 
       btn_unassign = '';
     } else {  
-      btn_unassign = `<a class="card-button " href="javascript:unassignRequestForRID(${item.req_id})" >Unassign </a>          `
+      btn_unassign = `<a class="card-button " href="javascript:unassignRequestForRID(${item.req_id})" >Unassign</a>          `
     }
   
     if  (item.req_assigned_to === null)  {
